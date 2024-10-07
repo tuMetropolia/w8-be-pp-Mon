@@ -89,11 +89,27 @@
       "post": {
         "tags": ["Users"],
         "summary": "Register a new user",
+        "security": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "Password123!"
+                  }
+                },
+                "required": ["name", "email", "password"]
               }
             }
           }
@@ -127,6 +143,7 @@
       "post": {
         "tags": ["Users"],
         "summary": "Login a user",
+        "security": [],
         "requestBody": {
           "content": {
             "application/json": {
@@ -135,13 +152,14 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "format": "email"
+                    "example": "user@example.com"
                   },
                   "password": {
                     "type": "string",
-                    "format": "password"
+                    "example": "Password123!"
                   }
-                }
+                },
+                "required": ["email", "password"]
               }
             }
           }
@@ -175,6 +193,7 @@
       "get": {
         "tags": ["Tours"],
         "summary": "Get all tours",
+        "security": [],
         "responses": {
           "200": {
             "description": "A list of tours",
@@ -194,6 +213,7 @@
       "post": {
         "tags": ["Tours"],
         "summary": "Create a new tour",
+        "security": [],
         "requestBody": {
           "content": {
             "application/json": {
@@ -217,6 +237,7 @@
       "get": {
         "tags": ["Tours"],
         "summary": "Get a tour by ID",
+        "security": [],
         "parameters": [
           {
             "name": "tourId",
@@ -246,6 +267,7 @@
       "put": {
         "tags": ["Tours"],
         "summary": "Update a tour by ID",
+        "security": [],
         "parameters": [
           {
             "name": "tourId",
@@ -277,6 +299,7 @@
       "delete": {
         "tags": ["Tours"],
         "summary": "Delete a tour by ID",
+        "security": [],
         "parameters": [
           {
             "name": "tourId",
