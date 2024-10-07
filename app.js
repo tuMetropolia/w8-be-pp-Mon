@@ -2,10 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
-const {requestLogger,unknownEndpoint,errorHandler} = require("./middleware/customMiddleware");
+const {
+  requestLogger,
+  unknownEndpoint,
+  errorHandler,
+} = require("./middleware/customMiddleware");
 const todoTaskRouter = require("./routers/todoTaskRouter");
 const userRouter = require("./routers/userRouter");
 const tourRouter = require("./routers/tourRouter");
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = require("./swagger.json"); // Assuming swagger.json is in the same directory
 
 // express app
 const app = express();
@@ -19,6 +25,7 @@ app.use(express.json());
 app.use(requestLogger);
 
 app.get("/", (req, res) => res.send("API Running!"));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use("/api/todoTasks", todoTaskRouter);
 app.use("/api/users", userRouter);
